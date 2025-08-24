@@ -26,7 +26,7 @@ with sync_playwright() as playwright:
     expect(Dashboard_text).to_have_text('Dashboard')
     print("текст верный")
 
-
+playwright_registration.py
 
 
 
