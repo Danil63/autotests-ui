@@ -1,5 +1,5 @@
 from playwright.sync_api import expect
-from pages.base_page import BasePage
+from fixtures.base_page import BasePage
 
 class CoursesListPage(BasePage):
     TITLE = "[data-test-id='courses-title']"
