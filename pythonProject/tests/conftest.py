@@ -1,28 +1,22 @@
 import pytest
-from playwright.sync_api import sync_playwright
-from pages.create_course_page import CreateCoursePage
+from pages.dashboard_page import DashboardPage
 from pages.courses_list_page import CoursesListPage
+from pages.create_course_page import CreateCoursePage
 
 
-@pytest.fixture(scope="function")
-def browser():
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
-        yield browser
-        browser.close()
+@pytest.fixture
+def dashboard_page_with_state(page):
+    """Создает объект DashboardPage, используя стандартную фикстуру page"""
+    return DashboardPage(page)
 
 
-@pytest.fixture(scope="function")
-def create_course_page(browser):
-    context = browser.new_context()
-    page = context.new_page()
-    yield CreateCoursePage(page)
-    context.close()
+@pytest.fixture
+def courses_list_page(page):
+    """Создает объект CoursesListPage"""
+    return CoursesListPage(page)
 
 
-@pytest.fixture(scope="function")
-def courses_list_page(browser):
-    context = browser.new_context()
-    page = context.new_page()
-    yield CoursesListPage(page)
-    context.close()
+@pytest.fixture
+def create_course_page(page):
+    """Создает объект CreateCoursePage"""
+    return CreateCoursePage(page)
